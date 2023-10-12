@@ -1,11 +1,5 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-<style type="text/css">
-h2::before {
-  content: "&#8226; ";
-  margin-left: -0.5em;
-}
-</style>
 
 # {cudpalette}
 

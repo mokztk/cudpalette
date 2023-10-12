@@ -19,14 +19,6 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{css, echo = FALSE}
-h2::before {
-  content: "&#8226; ";
-  margin-left: -0.5em;
-}
-```
-
-
 # {cudpalette}
 
 <!-- badges: start -->
