@@ -49,11 +49,9 @@ cud_pal <- function(type = "accent", size = 6, pal = 1, direction = 1, warn = TR
   }
 
   # extract color combinations from table and vectorize
-  cols <-
-    subset(list_cud_palette,
-           list_cud_palette$t == type & list_cud_palette$s == size & list_cud_palette$p == pal)$colors |>
-    strsplit(", ") |>
-    unlist()
+  cols <- subset(list_cud_palette,
+                 list_cud_palette$t == type & list_cud_palette$s == size & list_cud_palette$p == pal)$colors
+  cols <- unlist(strsplit(cols, ", "))
 
   # return a closure to work as palette function
   if (direction == -1) cols <- rev(cols)
