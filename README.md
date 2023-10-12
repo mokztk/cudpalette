@@ -29,30 +29,12 @@ ver.4」(<https://cudo.jp/?page_id=1565>)
 CUD推奨カラーパレットの色名からカラーコードを取得。存在しない色は NA
 を返す
 
-| colname          | value    | sample                                                      |
-|:-----------------|:---------|:------------------------------------------------------------|
-| red              | \#FF4B00 | <span style="background-color:#FF4B00"> sample text </span> |
-| yellow           | \#FFF100 | <span style="background-color:#FFF100"> sample text </span> |
-| green            | \#03AF7A | <span style="background-color:#03AF7A"> sample text </span> |
-| blue             | \#005AFF | <span style="background-color:#005AFF"> sample text </span> |
-| skyblue          | \#4DC4FF | <span style="background-color:#4DC4FF"> sample text </span> |
-| pink             | \#FF8082 | <span style="background-color:#FF8082"> sample text </span> |
-| orange           | \#F6AA00 | <span style="background-color:#F6AA00"> sample text </span> |
-| purple           | \#990099 | <span style="background-color:#990099"> sample text </span> |
-| brown            | \#804000 | <span style="background-color:#804000"> sample text </span> |
-| lightpink        | \#FFCABF | <span style="background-color:#FFCABF"> sample text </span> |
-| cream            | \#FFFF80 | <span style="background-color:#FFFF80"> sample text </span> |
-| lightyellowgreen | \#D8F255 | <span style="background-color:#D8F255"> sample text </span> |
-| lightskyblue     | \#BFE4FF | <span style="background-color:#BFE4FF"> sample text </span> |
-| beige            | \#FFCA80 | <span style="background-color:#FFCA80"> sample text </span> |
-| lightgreen       | \#77D9A8 | <span style="background-color:#77D9A8"> sample text </span> |
-| lightpurple      | \#C9ACE6 | <span style="background-color:#C9ACE6"> sample text </span> |
-| white            | \#FFFFFF | <span style="background-color:#FFFFFF"> sample text </span> |
-| lightgray        | \#C8C8CB | <span style="background-color:#C8C8CB"> sample text </span> |
-| lightgrey        | \#C8C8CB | <span style="background-color:#C8C8CB"> sample text </span> |
-| gray             | \#84919E | <span style="background-color:#84919E"> sample text </span> |
-| grey             | \#84919E | <span style="background-color:#84919E"> sample text </span> |
-| black            | \#000000 | <span style="background-color:#000000"> sample text </span> |
+    #>  [1] "red"              "yellow"           "green"            "blue"            
+    #>  [5] "skyblue"          "pink"             "orange"           "purple"          
+    #>  [9] "brown"            "lightpink"        "cream"            "lightyellowgreen"
+    #> [13] "lightskyblue"     "beige"            "lightgreen"       "lightpurple"     
+    #> [17] "white"            "lightgray"        "lightgrey"        "gray"            
+    #> [21] "grey"             "black"
 
 **cud_pal(type = “accent”, size = 6, pal = 1, direction = 1, warn =
 TRUE)**

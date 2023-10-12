@@ -39,13 +39,8 @@ CUDO（NPO法人 カラーユニバーサルデザイン機構）により示さ
 
 CUD推奨カラーパレットの色名からカラーコードを取得。存在しない色は NA を返す
 
-```{r, echo = FALSE, results = "asis"}
-cat("| colname | value | sample |\n")
-cat("|:--------|:------|:-------|\n")
-
-for (i in names(cudpalette:::list_cud_cols))
-  cat(sprintf("| %s | %s | [&nbsp;sample text&nbsp;]{style='background-color:%s'} |\n",
-              i, cudpalette::cud_color(i), cudpalette::cud_color(i)))
+```{r, echo = FALSE}
+names(cudpalette:::list_cud_cols)
 ```
 
 
