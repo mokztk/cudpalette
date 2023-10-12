@@ -39,6 +39,22 @@ CUDO（NPO法人 カラーユニバーサルデザイン機構）により示さ
 
 CUD推奨カラーパレットの色名からカラーコードを取得。存在しない色は NA を返す
 
+```{r, echo = FALSE, results = "asis"}
+cat("<table>")
+cat("<thead><th>colname</th><th>value</th><th>sample</th></thead>")
+cat("<tbody>")
+
+for (i in names(cudpalette:::list_cud_cols)) {
+  cat(sprintf("<tr><td>%s</td><td>`#%s`</td>", 
+              i, gsub("#", "", cudpalette::cud_color(i))))
+  cat(sprintf("<td style='background-color:%s'>&nbsp;</td></tr>\n", cudpalette::cud_color(i)))
+}
+
+cat("</tbody>")
+cat("</table>")
+```
+
+
 **cud_pal(type = "accent", size = 6, pal = 1, direction = 1, warn = TRUE)**
 
 「比較的見分けやすい組み合わせ」をパレットとして使用する。デフォルトはアクセントカラー 6色のひとつ\
@@ -71,7 +87,7 @@ cud_pal(type = "a", size = 5, pal = 2, direction = -1)(6)
 cud_pal(type = "a", size = 5, pal = 2, direction = -1, warn = FALSE)(6)
 ```
 
-### color sample
+### color palette sample
 
 ```{r sample_graph, echo = FALSE}
 library(cudpalette)
