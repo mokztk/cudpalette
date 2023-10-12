@@ -104,6 +104,7 @@ tbl_pallete <-
                    function(type, size, pal) cud_pal(type, size, pal, warn = F)())
   )
 
+set.seed(23456)
 sample_graph <-
   tibble(
     x = LETTERS[1:6],
