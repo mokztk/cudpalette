@@ -1,5 +1,11 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
+<style type="text/css">
+h2::before {
+  content: "&#8226; ";
+  margin-left: -0.5em;
+}
+</style>
 
 # {cudpalette}
 
@@ -21,6 +27,20 @@ CUDO（NPO法人
 ver.4」(<https://cudo.jp/?page_id=1565>)
 および「カラーユニバーサルデザイン推奨配色セット ガイドブック
 第2版」（[PDF](https://cudo.jp/wp-content/uploads/2018/10/cud_guidebook.pdf)）の「比較的見分けやすい組み合わせ（画面用）」をカラーパレットとして利用できるようにする。
+
+### Functions :
+
+**cud_color(colname)**
+
+CUD推奨カラーパレットの色名からカラーコードを取得。存在しない色は NA
+を返す
+
+**cud_pal(type = “accent”, size = 6, pal = 1, direction = 1, warn =
+TRUE)**
+
+「比較的見分けやすい組み合わせ」をパレットとして使用する。デフォルトはアクセントカラー
+6色のひとつ  
+色が足りない場合は警告メッセージ（warn = F でoff可）を出してループで使用
 
 ## Installation
 

@@ -19,6 +19,14 @@ knitr::opts_chunk$set(
 )
 ```
 
+```{css, echo = FALSE}
+h2::before {
+  content: "&#8226; ";
+  margin-left: -0.5em;
+}
+```
+
+
 # {cudpalette}
 
 <!-- badges: start -->
@@ -29,16 +37,26 @@ knitr::opts_chunk$set(
 
 Create color palette function using model color palette for Color Universal Design (Color Universal Design Organization, 2018, https://cudo.jp/?page_id=1565).
 
-## About this package (in Japanese)
+## About this package (in Japanese) 
 
 CUDO（NPO法人 カラーユニバーサルデザイン機構）により示されている「カラーユニバーサルデザイン推奨配色セット ver.4」(https://cudo.jp/?page_id=1565) および「カラーユニバーサルデザイン推奨配色セット ガイドブック 第2版」（[PDF](https://cudo.jp/wp-content/uploads/2018/10/cud_guidebook.pdf)）の「比較的見分けやすい組み合わせ（画面用）」をカラーパレットとして利用できるようにする。
+
+### Functions :
+
+**cud_color(colname)**
+
+CUD推奨カラーパレットの色名からカラーコードを取得。存在しない色は NA を返す
+
+**cud_pal(type = "accent", size = 6, pal = 1, direction = 1, warn = TRUE)**
+
+「比較的見分けやすい組み合わせ」をパレットとして使用する。デフォルトはアクセントカラー 6色のひとつ\
+色が足りない場合は警告メッセージ（warn = F でoff可）を出してループで使用
 
 ## Installation
 
 ``` r
 remotes::install_github("mokztk/cudpalette")
 ```
-
 ## Example
 
 ### basic usage
