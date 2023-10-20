@@ -2,3 +2,5 @@
 
 export(cud_color)
 export(cud_pal)
+export(jis_color)
+export(jis_pal)

@@ -23,3 +23,8 @@ color palette function (closure)
 \description{
 create palette function using CUD model color palette
 }
+\seealso{
+Other palette: 
+\code{\link{jis_pal}()}
+}
+\concept{palette}
