@@ -33,11 +33,12 @@ max_sum_cide2000 <- function(colors) {
     ) %>%
     mutate(
       CIEDE2000 = map(data,
-                      ~ Reduce(calc_ciede2000,
-                               cudpalette::cud_color(.x),
-                               accumulate = T, right = T) %>%
-                        head(-1) %>%
-                        as.numeric()),
+                      ~ sapply(1:(length(.x) - 1),
+                               function(i, d) {
+                                 calc_ciede2000(cudpalette::cud_color(d[i]),
+                                                cudpalette::cud_color(d[i + 1]))
+                               },
+                               d = .x)),
       sum_DE2000 = map_dbl(CIEDE2000, sum)
     ) %>%
     arrange(sum_DE2000) %>%
