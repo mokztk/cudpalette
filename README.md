@@ -89,23 +89,23 @@ cud_color(c("red", "blue", "magenta", "purple"))
 #> [1] "#FF4B00" "#005AFF" NA        "#990099"
 
 cud_pal()()
-#> [1] "#03AF7A" "#005AFF" "#FFF100" "#F6AA00" "#4DC4FF" "#804000"
+#> [1] "#F6AA00" "#005AFF" "#FFF100" "#4DC4FF" "#804000" "#03AF7A"
 
 cud_pal(type = "a", size = 5, pal = 2, direction = -1)()
-#> [1] "#03AF7A" "#990099" "#F6AA00" "#4DC4FF" "#FFF100"
+#> [1] "#03AF7A" "#990099" "#FFF100" "#4DC4FF" "#F6AA00"
 
 cud_pal(type = "a", size = 7, pal = 2, direction = -1)()
 #> Warning in cud_pal(type = "a", size = 7, pal = 2, direction = -1): 
 #> 'size' should be in 1:6. Default (6) will be used.
-#> [1] "#03AF7A" "#FF4B00" "#F6AA00" "#4DC4FF" "#FFF100" "#005AFF"
+#> [1] "#03AF7A" "#FF4B00" "#4DC4FF" "#FFF100" "#005AFF" "#F6AA00"
 
 cud_pal(type = "a", size = 5, pal = 2, direction = -1)(6)
 #> Warning in cud_pal(type = "a", size = 5, pal = 2, direction = -1)(6): 
 #> Requested colors (6) > this palette (5). The palette will be used repeatedly.
-#> [1] "#03AF7A" "#990099" "#F6AA00" "#4DC4FF" "#FFF100" "#03AF7A"
+#> [1] "#03AF7A" "#990099" "#FFF100" "#4DC4FF" "#F6AA00" "#03AF7A"
 
 cud_pal(type = "a", size = 5, pal = 2, direction = -1, warn = FALSE)(6)
-#> [1] "#03AF7A" "#990099" "#F6AA00" "#4DC4FF" "#FFF100" "#03AF7A"
+#> [1] "#03AF7A" "#990099" "#FFF100" "#4DC4FF" "#F6AA00" "#03AF7A"
 ```
 
 ### color sample
