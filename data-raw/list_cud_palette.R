@@ -31,7 +31,8 @@ temp <- " t: s: p: colors
          ab: 6: 5: orange, blue, skyblue, brown, lightpink, cream
          ab: 6: 6: orange, blue, brown, lightpink, cream, lightskyblue
          ab: 6: 7: orange, blue, brown, lightpink, cream, lightpurple
-         ab: 6: 8: orange, blue, brown, cream, lightgreen, lightskyblue"
+         ab: 6: 8: orange, blue, brown, cream, lightgreen, lightskyblue
+          j: 6: 1: jis_red, jis_orange, jis_yellow, jis_green, jis_blue, jis_purple"
 
 list_cud_palette <- as.data.frame(read.delim(textConnection(temp), sep = ":", strip.white = TRUE))
 rm(temp)

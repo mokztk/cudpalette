@@ -12,7 +12,7 @@ MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.or
 
 Create color palette function using model color palette for Color
 Universal Design (Color Universal Design Organization, 2018,
-<https://cudo.jp/?page_id=1565>).
+<https://cudo.jp/?page_id=1565>) or JIS Z 9103:2018.
 
 ## About this package (in Japanese)
 
@@ -22,12 +22,15 @@ ver.4」(<https://cudo.jp/?page_id=1565>)
 および「カラーユニバーサルデザイン推奨配色セット ガイドブック
 第2版」（[PDF](https://cudo.jp/wp-content/uploads/2018/10/cud_guidebook.pdf)）の「比較的見分けやすい組み合わせ（画面用）」をカラーパレットとして利用できるようにする。
 
+同様の趣旨で制定されている[JIS安全色](https://safetycolor.jp/)（JIS Z
+9103:2018）も使用できるよう更新。
+
 ### Functions :
 
 **cud_color(colname)**
 
-CUD推奨カラーパレットの色名からカラーコードを取得。存在しない色は NA
-を返す
+CUD推奨カラーパレットの色名（下記）から対応するカラーコードを取得。存在しない色は
+NA を返す
 
     #>  [1] "red"              "yellow"           "green"            "blue"            
     #>  [5] "skyblue"          "pink"             "orange"           "purple"          
@@ -36,12 +39,34 @@ CUD推奨カラーパレットの色名からカラーコードを取得。存�
     #> [17] "white"            "lightgray"        "lightgrey"        "gray"            
     #> [21] "grey"             "black"
 
+`jis_` の接頭語をつけて `jis_color()` の色を取得することもできる
+
+    #> [1] "jis_red"       "jis_yellowred" "jis_orange"    "jis_yellow"   
+    #> [5] "jis_green"     "jis_blue"      "jis_purple"    "jis_white"    
+    #> [9] "jis_black"
+
+**jis_color(colname)**
+
+JIS Z 9103:2018 で定義されているカラーコードを取得。存在しない色は NA
+を返す
+
+    #> [1] "red"       "yellowred" "orange"    "yellow"    "green"     "blue"     
+    #> [7] "purple"    "white"     "black"
+
 **cud_pal(type = “accent”, size = 6, pal = 1, direction = 1, warn =
 TRUE)**
 
-「比較的見分けやすい組み合わせ」をパレットとして使用する。デフォルトはアクセントカラー
-6色のひとつ  
-色が足りない場合は警告メッセージ（warn = F でoff可）を出してループで使用
+「比較的見分けやすい組み合わせ」をパレットとして使用する。可能な組み合わせは下記サンプルを参照。
+
+デフォルトはアクセントカラー
+6色のひとつ。色が足りない場合は警告メッセージ（warn = F
+でoff可）を出してループで使用
+
+**jis_pal(direction = 1, warn = TRUE)**
+
+JIS Z 9103:2018
+で定義されている色をパレットとして使用。`cud_pal(type = "jis")`
+を呼び出すラッパー関数。
 
 ## Installation
 
@@ -70,13 +95,13 @@ cud_pal(type = "a", size = 5, pal = 2, direction = -1)()
 #> [1] "#990099" "#4DC4FF" "#03AF7A" "#FFF100" "#F6AA00"
 
 cud_pal(type = "a", size = 7, pal = 2, direction = -1)()
-#> Warning in cud_pal(type = "a", size = 7, pal = 2, direction = -1): 'size'
-#> should be in 1:6. Default (6) will be used.
+#> Warning in cud_pal(type = "a", size = 7, pal = 2, direction = -1): 
+#> 'size' should be in 1:6. Default (6) will be used.
 #> [1] "#4DC4FF" "#005AFF" "#03AF7A" "#FFF100" "#F6AA00" "#FF4B00"
 
 cud_pal(type = "a", size = 5, pal = 2, direction = -1)(6)
-#> Warning in cud_pal(type = "a", size = 5, pal = 2, direction = -1)(6): Requested
-#> colors (6) > this palette (5). The palette will be used repeatedly.
+#> Warning in cud_pal(type = "a", size = 5, pal = 2, direction = -1)(6): 
+#> Requested colors (6) > this palette (5). The palette will be used repeatedly.
 #> [1] "#990099" "#4DC4FF" "#03AF7A" "#FFF100" "#F6AA00" "#990099"
 
 cud_pal(type = "a", size = 5, pal = 2, direction = -1, warn = FALSE)(6)

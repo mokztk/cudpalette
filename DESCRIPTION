@@ -1,10 +1,10 @@
 Package: cudpalette
 Type: Package
 Title: Create color palette using Color Universal Design model palette
-Version: 0.1.0
+Version: 0.2.0
 Author: MORI, Kazutaka
 Maintainer: MORI, Kazutaka <mori.kazutaka@gmail.com>
-Description: Create color palette function using model color palette for Color Universal Design (Color Universal Design Organization, 2018, https://cudo.jp/?page_id=1565).
+Description: Create color palette function using model color palette for Color Universal Design (Color Universal Design Organization, 2018, https://cudo.jp/?page_id=1565) or JIS Z 9103:2018.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Depends: 

@@ -13,5 +13,11 @@ cud_color(colname)
 vector of hexadecimal color codes (#rrggbb).
 }
 \description{
-Get CUD color code
+Get Color Universal Design or JIS Z 9103:2018 color code(s) from color name(s).
+The color name(s) for JIS color should be specified with a "jis_" prefix.
 }
+\seealso{
+Other color: 
+\code{\link{jis_color}()}
+}
+\concept{color}
