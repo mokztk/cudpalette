@@ -6,15 +6,16 @@
 #' @param direction Sets the order of colors. If -1, the order of colors is reversed.
 #' @param warn a logical (default is TRUE) indicating whether puts warning message for invalid parameters.
 #' @return color palette function (closure)
+#' @family palette
 #' @export
 #'
 cud_pal <- function(type = "accent", size = 6, pal = 1, direction = 1, warn = TRUE) {
   # parameter checking
-  if (!(type %in% c("a", "accent", "b", "base", "accent_base", "ab"))) {
+  if (!(type %in% c("a", "accent", "b", "base", "accent_base", "ab", "jis", "j"))) {
     stop(
       paste0("type = '", type,
              "' is not available.\n 'type' should be one of: ",
-             "'accent' (or 'a', default), 'base' (or 'b'), 'accent_base' (or 'ab').")
+             "'accent' (or 'a', default), 'base' (or 'b'), 'accent_base' (or 'ab'), 'jis' (or 'j').")
     )
   } else {
     type <- ifelse(type == "accent_base" | type == "ab", "ab", substr(type, 1, 1))
