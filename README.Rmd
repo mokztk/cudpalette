@@ -39,7 +39,7 @@ CUDO（NPO法人 カラーユニバーサルデザイン機構）により示さ
 
 ### Functions :
 
-**cud_color(colname)**
+**`cud_color(colname)`**
 
 CUD推奨カラーパレットの色名（下記）から対応するカラーコードを取得。存在しない色は NA を返す
 
@@ -54,7 +54,7 @@ paste0("jis_", names(cudpalette:::list_jis_cols))
 ```
 
 
-**jis_color(colname)**
+**`jis_color(colname)`**
 
 JIS Z 9103:2018 で定義されているカラーコードを取得。存在しない色は NA を返す
 
@@ -62,13 +62,14 @@ JIS Z 9103:2018 で定義されているカラーコードを取得。存在し�
 names(cudpalette:::list_jis_cols)
 ```
 
-**cud_pal(type = "accent", size = 6, pal = 1, direction = 1, warn = TRUE)**
+**`cud_pal(type, size, pal, direction, reorder, warn)`**
 
-「比較的見分けやすい組み合わせ」をパレットとして使用する。可能な組み合わせは下記サンプルを参照。
+「比較的見分けやすい組み合わせ」をパレットとして使用する。可能な組み合わせは下記サンプルを参照。\
+隣り合う色の色差を最大化するために色を並べ替えている。出典資料に出てくる順に戻したい場合は、`reorder = F`。
 
-デフォルトはアクセントカラー 6色のひとつ。色が足りない場合は警告メッセージ（warn = F でoff可）を出してループで使用
+デフォルトはアクセントカラー 6色のひとつ。色が足りない場合は警告メッセージ（`warn = F` でoff可）を出してループで使用する。
 
-**jis_pal(direction = 1, warn = TRUE)**
+**`jis_pal(direction, reorder, warn)`**
 
 JIS Z 9103:2018 で定義されている色をパレットとして使用。`cud_pal(type = "jis")` を呼び出すラッパー関数。
 
@@ -100,6 +101,8 @@ cud_pal(type = "a", size = 5, pal = 2, direction = -1, warn = FALSE)(6)
 ```
 
 ### color sample
+
+with parameter `reorder = TRUE` (reorder palettes maximizing color differences between adjacent colors)
 
 ```{r sample_graph, echo = FALSE}
 library(cudpalette)
@@ -158,3 +161,10 @@ tbl_pallete %>%
   plot_grid(plotlist = ., ncol = 4)
 ```
 
+-----
+
+# Version history
+
+- :bookmark:[v0.1.0](https://github.com/mokztk/cudpalette/releases/tag/v0.1.0) (2023-10-12): impremented the model color palette for Color Universal Design.
+- :bookmark:[v0.2.0](https://github.com/mokztk/cudpalette/releases/tag/v0.2.0) (2023-10-20): impremented the JIS Safety Colors (JIS Z 9103:2018).
+- :bookmark:[v0.3.0](https://github.com/mokztk/cudpalette/releases/tag/v0.3.0) (2023-10-20): reorder palettes to maximize color differences between adjacent colors.
