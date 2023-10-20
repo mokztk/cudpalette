@@ -4,12 +4,15 @@
 #' @param size The number of colors in palette (default is 6).
 #' @param pal The number of the palette (default is 1).
 #' @param direction Sets the order of colors. If -1, the order of colors is reversed.
+#' @param reorder a logical (default is TRUE).
+#' If TRUE, the order of colors is reorderd to maximize color difference between adjacent colors.
+#' If FALSE, the order is along with the order described in reference documents.
 #' @param warn a logical (default is TRUE) indicating whether puts warning message for invalid parameters.
 #' @return color palette function (closure)
 #' @family palette
 #' @export
 #'
-cud_pal <- function(type = "accent", size = 6, pal = 1, direction = 1, warn = TRUE) {
+cud_pal <- function(type = "accent", size = 6, pal = 1, direction = 1, reorder = TRUE, warn = TRUE) {
   # parameter checking
   if (!(type %in% c("a", "accent", "b", "base", "accent_base", "ab", "jis", "j"))) {
     stop(
@@ -51,7 +54,8 @@ cud_pal <- function(type = "accent", size = 6, pal = 1, direction = 1, warn = TR
 
   # extract color combinations from table and vectorize
   cols <- subset(list_cud_palette,
-                 list_cud_palette$t == type & list_cud_palette$s == size & list_cud_palette$p == pal)$colors
+                 list_cud_palette$t == type & list_cud_palette$s == size & list_cud_palette$p == pal)
+  cols <- ifelse(reorder, cols$colors, cols$colors_old)
   cols <- unlist(strsplit(cols, ", "))
 
   # return a closure to work as palette function

@@ -4,7 +4,14 @@
 \alias{cud_pal}
 \title{create palette function using CUD model color palette}
 \usage{
-cud_pal(type = "accent", size = 6, pal = 1, direction = 1, warn = TRUE)
+cud_pal(
+  type = "accent",
+  size = 6,
+  pal = 1,
+  direction = 1,
+  reorder = TRUE,
+  warn = TRUE
+)
 }
 \arguments{
 \item{type}{The name of color category (default is "accent").}
@@ -14,6 +21,10 @@ cud_pal(type = "accent", size = 6, pal = 1, direction = 1, warn = TRUE)
 \item{pal}{The number of the palette (default is 1).}
 
 \item{direction}{Sets the order of colors. If -1, the order of colors is reversed.}
+
+\item{reorder}{a logical (default is TRUE).
+If TRUE, the order of colors is reorderd to maximize color difference between adjacent colors.
+If FALSE, the order is along with the order described in reference documents.}
 
 \item{warn}{a logical (default is TRUE) indicating whether puts warning message for invalid parameters.}
 }
