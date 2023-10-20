@@ -13,7 +13,7 @@ cud_pal <- function(type = "accent", size = 6, pal = 1, direction = 1, warn = TR
   # parameter checking
   if (!(type %in% c("a", "accent", "b", "base", "accent_base", "ab", "jis", "j"))) {
     stop(
-      paste0("type = '", type,
+      paste0("\ntype = '", type,
              "' is not available.\n 'type' should be one of: ",
              "'accent' (or 'a', default), 'base' (or 'b'), 'accent_base' (or 'ab'), 'jis' (or 'j').")
     )
@@ -33,7 +33,7 @@ cud_pal <- function(type = "accent", size = 6, pal = 1, direction = 1, warn = TR
   if (size < min(subset(list_cud_palette, list_cud_palette$t == type)$s) |
       size > max(subset(list_cud_palette, list_cud_palette$t == type)$s)) {
     if (warn) warning(
-      sprintf("'size' should be in 1:%d. Default (%d) will be used.",
+      sprintf("\n'size' should be in 1:%d. Default (%d) will be used.",
               max(subset(list_cud_palette, list_cud_palette$t == type)$s),
               max(subset(list_cud_palette, list_cud_palette$t == type)$s))
     )
@@ -43,7 +43,7 @@ cud_pal <- function(type = "accent", size = 6, pal = 1, direction = 1, warn = TR
   if (pal < min(subset(list_cud_palette, list_cud_palette$t == type & list_cud_palette$s == size)$p) |
       pal > max(subset(list_cud_palette, list_cud_palette$t == type & list_cud_palette$s == size)$p)) {
     if (warn) warning(
-      sprintf("'pal' should be in 1:%d. Default (1) will be used.",
+      sprintf("\n'pal' should be in 1:%d. Default (1) will be used.",
               max(subset(list_cud_palette, list_cud_palette$t == type & list_cud_palette$s == size)$p))
     )
     pal <- 1
@@ -66,7 +66,7 @@ cud_pal <- function(type = "accent", size = 6, pal = 1, direction = 1, warn = TR
     # if requested number of colors was over those in palette, use colors repeatedly
     if (n > size) {
       if (warn) warning(
-        sprintf("Requested colors (%d) > this palette (%d). The palette will be used repeatedly.",
+        sprintf("\nRequested colors (%d) > this palette (%d). The palette will be used repeatedly.",
                 n, size)
       )
       codes <- rep(codes, length.out = n)
