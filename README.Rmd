@@ -3,6 +3,8 @@ output:
   github_document:
     fig_width: 8
     fig_height: 10
+editor_options: 
+  chunk_output_type: console
 ---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
@@ -27,27 +29,48 @@ knitr::opts_chunk$set(
 
 <!-- badges: end -->
 
-Create color palette function using model color palette for Color Universal Design (Color Universal Design Organization, 2018, https://cudo.jp/?page_id=1565).
+Create color palette function using model color palette for Color Universal Design (Color Universal Design Organization, 2018, https://cudo.jp/?page_id=1565) or JIS Z 9103:2018.
 
 ## About this package (in Japanese) 
 
 CUDO（NPO法人 カラーユニバーサルデザイン機構）により示されている「カラーユニバーサルデザイン推奨配色セット ver.4」(https://cudo.jp/?page_id=1565) および「カラーユニバーサルデザイン推奨配色セット ガイドブック 第2版」（[PDF](https://cudo.jp/wp-content/uploads/2018/10/cud_guidebook.pdf)）の「比較的見分けやすい組み合わせ（画面用）」をカラーパレットとして利用できるようにする。
 
+同様の趣旨で制定されている[JIS安全色](https://safetycolor.jp/)（JIS Z 9103:2018）も使用できるよう更新。
+
 ### Functions :
 
 **cud_color(colname)**
 
-CUD推奨カラーパレットの色名からカラーコードを取得。存在しない色は NA を返す
+CUD推奨カラーパレットの色名（下記）から対応するカラーコードを取得。存在しない色は NA を返す
 
 ```{r, echo = FALSE}
 names(cudpalette:::list_cud_cols)
 ```
 
+`jis_` の接頭語をつけて `jis_color()` の色を取得することもできる
+
+```{r, echo = FALSE}
+paste0("jis_", names(cudpalette:::list_jis_cols))
+```
+
+
+**jis_color(colname)**
+
+JIS Z 9103:2018 で定義されているカラーコードを取得。存在しない色は NA を返す
+
+```{r, echo = FALSE}
+names(cudpalette:::list_jis_cols)
+```
 
 **cud_pal(type = "accent", size = 6, pal = 1, direction = 1, warn = TRUE)**
 
-「比較的見分けやすい組み合わせ」をパレットとして使用する。デフォルトはアクセントカラー 6色のひとつ\
-色が足りない場合は警告メッセージ（warn = F でoff可）を出してループで使用
+「比較的見分けやすい組み合わせ」をパレットとして使用する。可能な組み合わせは下記サンプルを参照。
+
+デフォルトはアクセントカラー 6色のひとつ。色が足りない場合は警告メッセージ（warn = F でoff可）を出してループで使用
+
+**jis_pal(direction = 1, warn = TRUE)**
+
+JIS Z 9103:2018 で定義されている色をパレットとして使用。`cud_pal(type = "jis")` を呼び出すラッパー関数。
 
 ## Installation
 
@@ -91,7 +114,8 @@ tbl_pallete <-
     "accent",      4,     6,
     "base",        4,     2,
     "base",        3,     5,
-    "accent_base", 6,     8
+    "accent_base", 6,     8,
+    "jis",         6,     1,
   ) %>%
   mutate(pal = map(pal_max, ~ 1:.)) %>%
   select(-pal_max) %>%
