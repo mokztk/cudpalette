@@ -1,0 +1,136 @@
+---
+output: 
+  github_document:
+    fig_width: 8
+    fig_height: 10
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+library(tidyverse)
+library(cowplot)
+
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# {cudpalette}
+
+<!-- badges: start -->
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+<!-- badges: end -->
+
+Create color palette function using model color palette for Color Universal Design (Color Universal Design Organization, 2018, https://cudo.jp/?page_id=1565).
+
+## About this package (in Japanese) 
+
+CUDO（NPO法人 カラーユニバーサルデザイン機構）により示されている「カラーユニバーサルデザイン推奨配色セット ver.4」(https://cudo.jp/?page_id=1565) および「カラーユニバーサルデザイン推奨配色セット ガイドブック 第2版」（[PDF](https://cudo.jp/wp-content/uploads/2018/10/cud_guidebook.pdf)）の「比較的見分けやすい組み合わせ（画面用）」をカラーパレットとして利用できるようにする。
+
+### Functions :
+
+**cud_color(colname)**
+
+CUD推奨カラーパレットの色名からカラーコードを取得。存在しない色は NA を返す
+
+```{r, echo = FALSE}
+names(cudpalette:::list_cud_cols)
+```
+
+
+**cud_pal(type = "accent", size = 6, pal = 1, direction = 1, warn = TRUE)**
+
+「比較的見分けやすい組み合わせ」をパレットとして使用する。デフォルトはアクセントカラー 6色のひとつ\
+色が足りない場合は警告メッセージ（warn = F でoff可）を出してループで使用
+
+## Installation
+
+``` r
+remotes::install_github("mokztk/cudpalette")
+```
+## Example
+
+### basic usage
+
+```{r example}
+library(cudpalette)
+
+cud_color("red")
+
+cud_color(c("red", "blue", "magenta", "purple"))
+
+cud_pal()()
+
+cud_pal(type = "a", size = 5, pal = 2, direction = -1)()
+
+cud_pal(type = "a", size = 7, pal = 2, direction = -1)()
+
+cud_pal(type = "a", size = 5, pal = 2, direction = -1)(6)
+
+cud_pal(type = "a", size = 5, pal = 2, direction = -1, warn = FALSE)(6)
+```
+
+### color sample
+
+```{r sample_graph, echo = FALSE}
+library(cudpalette)
+library(tidyverse)
+library(cowplot)
+
+tbl_pallete <-
+  tribble(
+    ~type,         ~size, ~pal_max,
+    "accent",      6,     3,
+    "accent",      5,     5,
+    "accent",      4,     6,
+    "base",        4,     2,
+    "base",        3,     5,
+    "accent_base", 6,     8
+  ) %>%
+  mutate(pal = map(pal_max, ~ 1:.)) %>%
+  select(-pal_max) %>%
+  unnest(cols = pal) %>% 
+  mutate(
+    palette = pmap(list(type, size, pal),
+                   function(type, size, pal) cud_pal(type, size, pal, warn = F)())
+  )
+
+set.seed(23456)
+sample_graph <-
+  tibble(
+    x = LETTERS[1:6],
+    y = runif(6, 6, 10)
+  ) %>% 
+  ggplot(aes(x, y, fill = x, linetype = x)) +
+    geom_col(colour = "black") +
+    scale_y_continuous(limits = c(0, 10), expand = c(0, 0)) +
+    guides(fill = "none", linetype = "none") + 
+    theme_light() + 
+    theme(
+      axis.line = element_line(colour = "black"),
+      axis.text = element_blank(), 
+      axis.title = element_blank(),
+      plot.title = element_text(size = 9)
+    )
+
+tbl_pallete %>% 
+  mutate(
+    plot = pmap(list(type, size, pal, palette),
+                function(type, size, pal, palette) 
+                  sample_graph + 
+                    ggtitle(paste(type, "/ size =", size, "/ pal =", pal)) +
+                    scale_fill_manual(values = c(palette, rep("white", 6))) +
+                    scale_linetype_manual(values = c(rep("solid", length(palette)),
+                                                     rep("dotted", 6)))
+                )
+  ) %>%
+  pull(plot) %>% 
+  plot_grid(plotlist = ., ncol = 4)
+```
+
