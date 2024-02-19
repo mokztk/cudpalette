@@ -25,12 +25,17 @@ ver.4」(<https://cudo.jp/?page_id=1565>)
 同様の趣旨で制定されている[JIS安全色](https://safetycolor.jp/)（JIS Z
 9103:2018）も使用できるよう更新。
 
-### Functions :
+## Functions :
 
-**`cud_color(colname)`**
+### `cud_color(colname)`
 
-CUD推奨カラーパレットの色名（下記）から対応するカラーコードを取得。存在しない色は
-NA を返す
+Get Color Universal Design or JIS Z 9103:2018 color code(s) from color
+name(s) listed berow. The color name(s) for JIS color should be
+specified with a “jis\_” prefix.  
+If “colorname” is not exist in the list, `NA` will be return.
+
+> CUD推奨カラーパレットの色名（下記）から対応するカラーコードを取得。存在しない色は
+> NA を返す
 
     #>  [1] "red"              "yellow"           "green"            "blue"            
     #>  [5] "skyblue"          "pink"             "orange"           "purple"          
@@ -39,34 +44,50 @@ NA を返す
     #> [17] "white"            "lightgray"        "lightgrey"        "gray"            
     #> [21] "grey"             "black"
 
-`jis_` の接頭語をつけて `jis_color()` の色を取得することもできる
+> `jis_` の接頭語をつけて `jis_color()` の色を取得することもできる
 
     #> [1] "jis_red"       "jis_yellowred" "jis_orange"    "jis_yellow"   
     #> [5] "jis_green"     "jis_blue"      "jis_purple"    "jis_white"    
     #> [9] "jis_black"
 
-**`jis_color(colname)`**
+### `jis_color(colname)`
 
-JIS Z 9103:2018 で定義されているカラーコードを取得。存在しない色は NA
-を返す
+Get JIS Z 9103:2018 color code.  
+`NA` will be return when “colorname” is not exist in the following list.
+
+> JIS Z 9103:2018 で定義されているカラーコードを取得。存在しない色は NA
+> を返す
 
     #> [1] "red"       "yellowred" "orange"    "yellow"    "green"     "blue"     
     #> [7] "purple"    "white"     "black"
 
-**`cud_pal(type, size, pal, direction, reorder, warn)`**
+### `cud_pal(type, size, pal, direction, reorder, warn)`
 
-「比較的見分けやすい組み合わせ」をパレットとして使用する。可能な組み合わせは下記サンプルを参照。  
-隣り合う色の色差を最大化するために色を並べ替えている。出典資料に出てくる順に戻したい場合は、`reorder = F`。
+Use patterns recommended as easy-to-distinguish combinations in the
+materials as a palette. See the sample at the end of this page for
+possible combinations.  
+The default pallete is `type = "accent", size = 6, pal = 1`. If
+requested number of colors is more than in the pallete, colors are used
+repeatedly (warning message could be suppressed with `warn = F`
+option).  
+Colors are reorderd to maximize the color difference between adjacent
+colors. If you want to go back to the order in which they described in
+the source material, use `reorder = F`.
 
-デフォルトはアクセントカラー
-6色のひとつ。色が足りない場合は警告メッセージ（`warn = F`
-でoff可）を出してループで使用する。
+> 「比較的見分けやすい組み合わせ」をパレットとして使用する。可能な組み合わせは下記サンプルを参照。  
+> 隣り合う色の色差を最大化するために色を並べ替えている。出典資料に出てくる順に戻したい場合は、`reorder = F`。
+>
+> デフォルトはアクセントカラー
+> 6色のひとつ。色が足りない場合は警告メッセージ（`warn = F`
+> でoff可）を出してループで使用する。
 
-**`jis_pal(direction, reorder, warn)`**
+### `jis_pal(direction, reorder, warn)`
 
-JIS Z 9103:2018
-で定義されている色をパレットとして使用。`cud_pal(type = "jis")`
-を呼び出すラッパー関数。
+This is a wrapper function calls ‘cud_pal()’ with type = “jis”.
+
+> JIS Z 9103:2018
+> で定義されている色をパレットとして使用。`cud_pal(type = "jis")`
+> を呼び出すラッパー関数。
 
 ## Installation
 
@@ -89,23 +110,23 @@ cud_color(c("red", "blue", "magenta", "purple"))
 #> [1] "#FF4B00" "#005AFF" NA        "#990099"
 
 cud_pal()()
-#> [1] "#F6AA00" "#005AFF" "#FFF100" "#4DC4FF" "#804000" "#03AF7A"
+#> [1] "#F6AA00" "#03AF7A" "#804000" "#4DC4FF" "#FFF100" "#005AFF"
 
 cud_pal(type = "a", size = 5, pal = 2, direction = -1)()
-#> [1] "#03AF7A" "#990099" "#FFF100" "#4DC4FF" "#F6AA00"
+#> [1] "#4DC4FF" "#FFF100" "#990099" "#03AF7A" "#F6AA00"
 
 cud_pal(type = "a", size = 7, pal = 2, direction = -1)()
 #> Warning in cud_pal(type = "a", size = 7, pal = 2, direction = -1): 
 #> 'size' should be in 1:6. Default (6) will be used.
-#> [1] "#03AF7A" "#FF4B00" "#4DC4FF" "#FFF100" "#005AFF" "#F6AA00"
+#> [1] "#4DC4FF" "#FFF100" "#005AFF" "#F6AA00" "#03AF7A" "#FF4B00"
 
 cud_pal(type = "a", size = 5, pal = 2, direction = -1)(6)
 #> Warning in cud_pal(type = "a", size = 5, pal = 2, direction = -1)(6): 
 #> Requested colors (6) > this palette (5). The palette will be used repeatedly.
-#> [1] "#03AF7A" "#990099" "#FFF100" "#4DC4FF" "#F6AA00" "#03AF7A"
+#> [1] "#4DC4FF" "#FFF100" "#990099" "#03AF7A" "#F6AA00" "#4DC4FF"
 
 cud_pal(type = "a", size = 5, pal = 2, direction = -1, warn = FALSE)(6)
-#> [1] "#03AF7A" "#990099" "#FFF100" "#4DC4FF" "#F6AA00" "#03AF7A"
+#> [1] "#4DC4FF" "#FFF100" "#990099" "#03AF7A" "#F6AA00" "#4DC4FF"
 ```
 
 ### color sample
@@ -127,3 +148,6 @@ differences between adjacent colors)
 - :bookmark:[v0.3.0](https://github.com/mokztk/cudpalette/releases/tag/v0.3.0)
   (2023-10-20): reorder palettes to maximize color differences between
   adjacent colors.
+- :bookmark:[v0.4.0](https://github.com/mokztk/cudpalette/releases/tag/v0.4.0)
+  (2024-02-20): reorder (again) palettes to maximize color differences
+  considering repeated use.

@@ -24,13 +24,13 @@ max_sum_cide2000 <- function(colors) {
 
   # compute and sort CIEDE2000 for all permutations of colors
   temp_tbl <- gtools::permutations(n = length(vec_color),
-                                   r = length(vec_color),
-                                   v = vec_color)
+                                   r = length(vec_color))
 
   tibble(
       id   = 1:nrow(temp_tbl),
-      data = map(id, ~ temp_tbl[.x,])
-    ) %>%
+      data = map(id,
+                 ~ vec_color[c(temp_tbl[.x,], temp_tbl[.x, 1])])
+    ) |>
     mutate(
       CIEDE2000 = map(data,
                       ~ sapply(1:(length(.x) - 1),
@@ -39,18 +39,17 @@ max_sum_cide2000 <- function(colors) {
                                                 cudpalette::cud_color(d[i + 1]))
                                },
                                d = .x)),
-      sum_DE2000 = map_dbl(CIEDE2000, sum)
-    ) %>%
-    arrange(sum_DE2000) %>%
-    tail(1) %>%
-    unnest(cols = data) %>%
-    pull(data) |>
-    paste(collapse = ", ")
+      sum_DE2000 = map_dbl(CIEDE2000, sum),
+      colors     = map_chr(data, ~ paste(head(.x, -1), collapse = ", "))
+    ) |>
+    filter(sum_DE2000 == max(sum_DE2000)) |>
+    head(1) |>
+    pull(colors)
 }
 
 #' reorder palettes to maximize color differences between adjacent colors
 #'
 list_cud_palette <-
-  list_cud_palette %>%
-  rename(colors_old = colors) %>%
+  list_cud_palette |>
+  rename(colors_old = colors) |>
   mutate(colors = map_chr(colors_old, max_sum_cide2000))
